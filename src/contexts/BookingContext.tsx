@@ -99,25 +99,28 @@ export const BookingProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     const serviceDuration = service.duration_minutes;
     
-    // Horarios de atención
-    const businessHours = {
-      start: 9, // 9 AM
-      end: 19,  // 7 PM
-    };
+    // Ventanas de atención: mañana y tarde
+    const windows = [
+      { startHour: 8, startMinute: 30, endHour: 13, endMinute: 0 },
+      { startHour: 17, startMinute: 0, endHour: 20, endMinute: 30 },
+    ];
 
     // Generar slots de tiempo basados en la duración del servicio
     const slots: string[] = [];
-    for (let hour = businessHours.start; hour < businessHours.end; hour++) {
-      for (let minute = 0; minute < 60; minute += serviceDuration) {
+    for (const w of windows) {
+      const startTotal = w.startHour * 60 + w.startMinute;
+      const endTotal = w.endHour * 60 + w.endMinute;
+      for (let t = startTotal; t < endTotal; t += serviceDuration) {
+        const hour = Math.floor(t / 60);
+        const minute = t % 60;
         const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-        
-        // Verificar si este horario ya está ocupado
+
         const isSlotAvailable = !appointments.some(apt => 
           apt.date === date && 
           apt.time === time && 
           apt.status !== 'cancelled'
         );
-        
+
         if (isSlotAvailable) {
           slots.push(time);
         }

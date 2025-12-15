@@ -42,11 +42,11 @@ const Products: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <PageHero 
         title="Catálogo de Productos"
-        subtitle="Encuentra todo lo que necesitas para el bienestar y felicidad de tu mascota."
-        backgroundImage="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+        subtitle="Encuentre todo lo necesario para el bienestar y la felicidad de su mascota."
+        backgroundImage="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=1350&q=80"
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in-up">
         {/* Filters Section */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-10">
           <div className="flex items-center mb-6">
@@ -59,7 +59,7 @@ const Products: React.FC = () => {
               <div className="relative">
                 <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                 <Input
-                  placeholder="Buscar por nombre o descripción..."
+                  placeholder="Buscar por nombre o descripción"
                   value={searchTerm}
                   onChange={handleSearchChange}
                   className="pl-10"
@@ -116,7 +116,7 @@ const Products: React.FC = () => {
                 </span>
                 {product.stock < 5 && (
                   <span className="bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">
-                    Últimos
+                    Últimas unidades
                   </span>
                 )}
               </div>
@@ -143,7 +143,7 @@ const Products: React.FC = () => {
                       }}
                     >
                       <ShoppingCartIcon className="h-4 w-4 mr-2" />
-                      Agregar Rápido
+                      Agregar al carrito
                     </Button>
                 </div>
               </div>
@@ -176,7 +176,7 @@ const Products: React.FC = () => {
                   </div>
                   <div className="mt-2 flex items-center text-green-800 text-xs font-bold">
                     <CreditCardIcon className="h-3 w-3 mr-1" />
-                    3 cuotas s/interés
+                    3 cuotas sin interés
                   </div>
                 </div>
               </div>
@@ -188,7 +188,7 @@ const Products: React.FC = () => {
           <div className="text-center py-20 bg-white rounded-xl shadow-sm border border-gray-100 mt-8">
             <MagnifyingGlassIcon className="mx-auto h-12 w-12 text-gray-300" />
             <h3 className="mt-2 text-sm font-medium text-gray-900">No se encontraron productos</h3>
-            <p className="mt-1 text-sm text-gray-500">Prueba ajustando tus filtros de búsqueda.</p>
+            <p className="mt-1 text-sm text-gray-500">Pruebe ajustar los filtros de búsqueda.</p>
             <div className="mt-6">
               <Button 
                 variant="outline" 

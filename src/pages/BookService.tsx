@@ -105,7 +105,7 @@ const BookService: React.FC = () => {
       <PageHero 
         title={`Reservar ${service.name}`}
         subtitle={service.description}
-        backgroundImage="https://images.unsplash.com/photo-1596272875729-ed2c21ebbbda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+        backgroundImage="https://images.unsplash.com/photo-1596272875729-ed2c21ebbbda?auto=format&fit=crop&w=1350&q=80"
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

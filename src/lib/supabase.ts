@@ -14,7 +14,7 @@ export const mockData = {
       price: 12500,
       stock: 25,
       category: 'alimentos',
-      images: ['https://images.unsplash.com/photo-1585499193151-0f50d54c4e5c?w=500&auto=format&fit=crop&q=60'],
+      images: ['/img/alimentos.png'],
       specifications: { peso: '15kg', marca: 'PremiumPet' }
     },
     {
@@ -24,7 +24,7 @@ export const mockData = {
       price: 3500,
       stock: 15,
       category: 'accesorios',
-      images: ['https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=500&auto=format&fit=crop&q=60'],
+      images: ['/img/collar-tea-mediano.png'],
       specifications: { tamaño: 'mediano', duracion: '6 meses' }
     },
     {
@@ -34,7 +34,7 @@ export const mockData = {
       price: 2800,
       stock: 20,
       category: 'farmacia',
-      images: ['https://images.unsplash.com/photo-1623945193950-8919634d284a?w=500&auto=format&fit=crop&q=60'],
+      images: ['/img/shampoo.jpg'],
       specifications: { volumen: '500ml', tipo: 'hipoalergénico' }
     },
     {
@@ -44,7 +44,7 @@ export const mockData = {
       price: 18000,
       stock: 10,
       category: 'perros',
-      images: ['https://images.unsplash.com/photo-1591946614720-90a587da4a36?w=500&auto=format&fit=crop&q=60'],
+      images: ['/img/cama-moises.jpg'],
       specifications: { tamaño: 'L', material: 'Algodón' }
     },
     {
@@ -54,7 +54,7 @@ export const mockData = {
       price: 25000,
       stock: 8,
       category: 'gatos',
-      images: ['https://images.unsplash.com/photo-1545249390-6bdfa2a27c62?w=500&auto=format&fit=crop&q=60'],
+      images: ['/img/rascador.jpg'],
       specifications: { altura: '1.2m', color: 'Beige' }
     },
     {
@@ -64,7 +64,7 @@ export const mockData = {
       price: 4500,
       stock: 30,
       category: 'juguetes',
-      images: ['https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=500&auto=format&fit=crop&q=60'],
+      images: ['/img/pelota.png'],
       specifications: { material: 'Caucho', tamaño: 'M' }
     },
     {

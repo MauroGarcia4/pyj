@@ -11,6 +11,8 @@ const schema = yup.object({
   name: yup.string().required('El nombre es requerido'),
   email: yup.string().email('Email inválido').required('El email es requerido'),
   phone: yup.string(),
+  subject: yup.string().required('Seleccione un motivo'),
+  consent: yup.boolean().oneOf([true], 'Debe aceptar el aviso de privacidad'),
   message: yup.string().required('El mensaje es requerido'),
 }).required();
 
@@ -33,24 +35,39 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-gray-50">
       <PageHero 
-        title="Contáctanos"
-        subtitle="Estamos aquí para ayudarte. Escríbenos y te responderemos a la brevedad."
-        backgroundImage="https://images.unsplash.com/photo-1596272875729-ed2c21ebbbda?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+        title="Contáctenos"
+        subtitle="Estamos para asistirlo. Escríbanos y responderemos a la brevedad."
+        backgroundImage="/img/contacto.jpeg"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Envíanos un mensaje</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Envíenos un mensaje</h2>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 animate-fade-in-up">
               <Input
                 id="name"
                 label="Nombre completo"
-                placeholder="Tu nombre"
+                placeholder="Su nombre completo"
                 error={errors.name?.message}
                 {...register('name')}
               />
+              <div>
+                <label htmlFor="subject" className="mb-2 block text-sm font-medium text-gray-700">Motivo</label>
+                <select
+                  id="subject"
+                  className={`flex h-10 w-full rounded-md border bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent ${errors.subject ? 'border-red-500 focus:ring-red-500' : 'border-gray-300'}`}
+                  defaultValue=""
+                  {...register('subject')}
+                >
+                  <option value="">Seleccione una opción</option>
+                  <option value="consulta">Consulta general</option>
+                  <option value="turno">Reservar turno</option>
+                  <option value="compra">Compra / Envíos</option>
+                </select>
+                {errors.subject && <p className="mt-1 text-xs text-red-500">{errors.subject.message}</p>}
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
                   id="email"
@@ -82,13 +99,21 @@ export default function Contact() {
                 {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message.message}</p>}
               </div>
 
+              <div className="flex items-start gap-3">
+                <input id="consent" type="checkbox" className="mt-1 h-4 w-4 rounded border-gray-300" {...register('consent')} />
+                <label htmlFor="consent" className="text-sm text-gray-600">
+                  Acepto el aviso de privacidad y el uso de mis datos para responder a esta consulta.
+                </label>
+              </div>
+              {errors.consent && <p className="-mt-3 text-xs text-red-500">{errors.consent.message}</p>}
+
               <Button type="submit" size="lg" className="w-full" isLoading={isSubmitting}>
-                Enviar Mensaje
+                Enviar mensaje
               </Button>
 
               {sent && (
-                <div className="bg-green-50 text-green-700 p-4 rounded-md text-center animate-fade-in">
-                  ¡Gracias! Tu mensaje ha sido enviado. Te responderemos pronto.
+                <div className="bg-green-50 text-green-700 p-4 rounded-md text-center animate-fade-in-up">
+                  Gracias. Su mensaje ha sido enviado. Le responderemos a la brevedad.
                 </div>
               )}
             </form>
@@ -118,10 +143,10 @@ export default function Contact() {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">Teléfono & WhatsApp</h3>
-                    <p className="mt-1 text-gray-600">+54 9 346 123-4567</p>
-                    <a href="https://wa.me/5490000000000" target="_blank" rel="noopener" className="text-sm font-medium text-brand-primary hover:text-brand-deep mt-1 inline-block">
-                      Enviar WhatsApp &rarr;
+                    <h3 className="text-lg font-medium text-gray-900">Teléfono y WhatsApp</h3>
+                    <p className="mt-1 text-gray-600">+54 9 3364 02-2033</p>
+                    <a href="https://wa.me/5493364022033" target="_blank" rel="noopener" className="text-sm font-medium text-brand-primary hover:text-brand-deep mt-1 inline-block">
+                      Enviar mensaje por WhatsApp &rarr;
                     </a>
                   </div>
                 </div>
@@ -147,8 +172,7 @@ export default function Contact() {
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900">Horarios</h3>
                     <div className="mt-1 text-gray-600 space-y-1">
-                      <p><span className="font-medium">Lun - Vie:</span> 9:00 - 19:00</p>
-                      <p><span className="font-medium">Sáb:</span> 9:00 - 13:00</p>
+                      <p><span className="font-medium">Lun - Sáb:</span> 08:30 - 13:00 | 17:00 - 20:30</p>
                       <p><span className="font-medium">Dom:</span> Cerrado</p>
                     </div>
                   </div>

@@ -35,7 +35,7 @@ export default function Register() {
       await login(data.email, data.password);
       navigate('/');
     } catch (err) {
-      setAuthError('Error al crear la cuenta. Inténtalo de nuevo.');
+      setAuthError('No fue posible crear la cuenta. Intente nuevamente.');
     }
   };
 
@@ -44,10 +44,10 @@ export default function Register() {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         <div className="text-center">
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Crear una cuenta
+            Cree su cuenta
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Únete a nuestra comunidad de amantes de las mascotas
+            Únase a nuestra comunidad de amantes de las mascotas
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -113,7 +113,7 @@ export default function Register() {
               <div className="w-full border-t border-gray-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">O regístrate con</span>
+              <span className="px-2 bg-white text-gray-500">O regístrese con</span>
             </div>
           </div>
 
@@ -137,9 +137,9 @@ export default function Register() {
         </form>
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
-            ¿Ya tienes cuenta?{' '}
+            ¿Ya tiene cuenta?{' '}
             <Link to="/login" className="font-medium text-brand-primary hover:text-brand-deep">
-              Inicia sesión aquí
+              Inicie sesión aquí
             </Link>
           </p>
         </div>

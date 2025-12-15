@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { mockData } from '@/lib/supabase';
-import { Bars3Icon, XMarkIcon, ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline';
-// Logo vector (URL import for Vite)
-// @ts-ignore
-import logoUrl from '../../brand/logo.svg?url'
+import { Bars3Icon, XMarkIcon, ShoppingCartIcon, UserIcon, MagnifyingGlassIcon, MapPinIcon, ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline';
+import { Facebook, Instagram } from 'lucide-react';
+import logoUrl from '../../brand/logo.png?url'
 
 const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const { user, logout } = useAuth();
@@ -48,6 +47,24 @@ const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
     { name: 'Contacto', href: '/contact' },
   ];
 
+  useEffect(() => {
+    const base = 'Pedro & Juan';
+    const path = location.pathname;
+    let title = base;
+    if (path === '/products') title = `Productos | ${base}`;
+    else if (path === '/services') title = `Servicios | ${base}`;
+    else if (path.startsWith('/book-service')) title = `Reservar Servicio | ${base}`;
+    else if (path === '/appointments') title = `Mis Citas | ${base}`;
+    else if (path === '/cart') title = `Carrito | ${base}`;
+    else if (path === '/login') title = `Ingresar | ${base}`;
+    else if (path === '/register') title = `Registrarse | ${base}`;
+    else if (path === '/about') title = `Nosotros | ${base}`;
+    else if (path === '/contact') title = `Contacto | ${base}`;
+    else if (path === '/privacy') title = `Política de Privacidad | ${base}`;
+    else if (path === '/terms') title = `Términos y Condiciones | ${base}`;
+    document.title = title;
+  }, [location.pathname]);
+
   const isActive = (path: string) => {
     if (path === '/') return location.pathname === '/';
     return location.pathname.startsWith(path);
@@ -57,18 +74,35 @@ const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Top Bar - Retail Style */}
       <div className="bg-brand-deep text-white text-xs py-2 px-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-6">
-            <span className="flex items-center font-medium">
-              <span className="mr-2">🚚</span> Envío gratis desde $50.000
-            </span>
-            <span className="hidden sm:flex items-center font-medium">
-              <span className="mr-2">💳</span> 3 Cuotas sin interés
-            </span>
+        <div className="max-w-7xl mx-auto">
+          {/* Mobile static links */}
+          <div className="sm:hidden flex justify-between items-center">
+            <Link to="/contact" className="hover:text-brand-light">Soporte</Link>
+            <a href="https://maps.app.goo.gl/1PH98RB4i8n2FN7NA" target="_blank" rel="noopener" className="hover:text-brand-light">Sucursales</a>
+            {!user && <Link to="/register" className="hover:text-brand-light font-semibold">Crear cuenta</Link>}
           </div>
-          <div className="flex space-x-4">
-            <Link to="/contact" className="hover:text-brand-light transition-colors">Centro de Ayuda</Link>
-            {!user && <Link to="/register" className="hover:text-brand-light transition-colors font-semibold">Crear cuenta</Link>}
+          {/* Mobile ticker (promos) */}
+          <div className="ticker sm:hidden mt-1">
+            <div className="ticker-track flex items-center gap-6 whitespace-nowrap">
+              <span className="font-medium">Envío sin cargo en compras superiores a $50.000</span>
+              <span className="font-medium">Hasta 3 cuotas sin interés</span>
+              {/* duplicate for seamless loop */}
+              <span className="font-medium">Envío sin cargo en compras superiores a $50.000</span>
+              <span className="font-medium">Hasta 3 cuotas sin interés</span>
+            </div>
+          </div>
+          {/* Desktop */}
+          <div className="hidden sm:flex justify-between items-center">
+            <div className="flex items-center">
+              <span className="font-medium">Envío sin cargo en compras superiores a $50.000</span>
+              <span className="mx-3">•</span>
+              <span className="font-medium">Hasta 3 cuotas sin interés</span>
+            </div>
+            <div className="flex space-x-4">
+              <Link to="/contact" className="hover:text-brand-light transition-colors">Soporte</Link>
+              <a href="https://maps.app.goo.gl/1PH98RB4i8n2FN7NA" target="_blank" rel="noopener" className="hover:text-brand-light transition-colors">Sucursales</a>
+              {!user && <Link to="/register" className="hover:text-brand-light transition-colors font-semibold">Crear cuenta</Link>}
+            </div>
           </div>
         </div>
       </div>
@@ -87,7 +121,7 @@ const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
               <div className="relative w-full">
                 <input
                   type="text"
-                  placeholder="¿Qué estás buscando para tu mascota?"
+                  placeholder="Busque productos o servicios para su mascota"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={handleKeyDown}
@@ -141,7 +175,7 @@ const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
                   <UserIcon className="h-6 w-6" />
                   <div className="flex flex-col text-left">
                     <span className="text-xs text-gray-500">Bienvenido</span>
-                    <span className="text-sm font-semibold leading-none">Ingresa</span>
+                    <span className="text-sm font-semibold leading-none">Iniciar sesión</span>
                   </div>
                 </Link>
               )}
@@ -218,39 +252,62 @@ const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
         {children ? children : <Outlet />}
       </main>
 
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/5493364022033?text=Hola%20Pedro%20%26%20Juan%2C%20quiero%20hacer%20una%20consulta"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Enviar mensaje por WhatsApp"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 group"
+      >
+        <span className="sr-only">WhatsApp</span>
+        <div className="h-11 w-11 md:h-14 md:w-14 rounded-full shadow-md md:shadow-lg transition-colors flex items-center justify-center" style={{ backgroundColor: '#25D366' }}>
+          <ChatBubbleOvalLeftIcon className="h-5 w-5 md:h-7 md:w-7 text-white" />
+        </div>
+        <div className="hidden md:block absolute right-full mr-2 bottom-0 translate-y-1/2 bg-white text-gray-700 text-xs rounded-full px-3 py-1 shadow-sm border border-gray-200 opacity-0 group-hover:opacity-100">
+          Chatear por WhatsApp
+        </div>
+      </a>
+
       {/* Footer Retail Style */}
       <footer className="bg-white border-t border-gray-200 pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div className="col-span-1 md:col-span-1">
-               <img src={logoUrl} alt="Pedro y Juan" className="h-10 mb-4 grayscale opacity-70" />
-               <p className="text-gray-600 text-sm leading-relaxed">
-                 Tu pet shop de confianza en San Nicolás. Todo lo que tu mascota necesita, en un solo lugar.
-               </p>
-            </div>
-            <div>
-              <h4 className="font-bold text-gray-900 mb-4">Comprar</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li><Link to="/products" className="hover:text-brand-primary">Alimentos</Link></li>
-                <li><Link to="/products" className="hover:text-brand-primary">Accesorios</Link></li>
-                <li><Link to="/products" className="hover:text-brand-primary">Farmacia</Link></li>
-                <li><Link to="/products" className="hover:text-brand-primary">Ofertas</Link></li>
-              </ul>
+              <img src={logoUrl} alt="Pedro y Juan" className="h-10 mb-4 grayscale opacity-70" />
+              <p className="text-gray-600 text-sm leading-relaxed">
+                 Tienda especializada en mascotas en San Nicolás. Todo para el bienestar de su compañero en un único lugar.
+              </p>
             </div>
             <div>
               <h4 className="font-bold text-gray-900 mb-4">Ayuda</h4>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li><Link to="/contact" className="hover:text-brand-primary">Contacto</Link></li>
                 <li><Link to="/about" className="hover:text-brand-primary">Sobre Nosotros</Link></li>
-                <li><Link to="/services" className="hover:text-brand-primary">Sucursales</Link></li>
-                <li><Link to="/services" className="hover:text-brand-primary">Envíos</Link></li>
+                <li><a href="https://maps.app.goo.gl/1PH98RB4i8n2FN7NA" target="_blank" rel="noopener" className="hover:text-brand-primary">Sucursales</a></li>
+                <li><Link to="/shipping" className="hover:text-brand-primary">Envíos</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-gray-900 mb-4">Redes sociales</h4>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>
+                  <a href="https://www.facebook.com/pedroyjuan.sn/?locale=es_LA" target="_blank" rel="noopener" className="flex items-center hover:text-brand-primary">
+                    <Facebook className="h-4 w-4 mr-2" /> Facebook
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/pedroyjuan/?hl=es-la" target="_blank" rel="noopener" className="flex items-center hover:text-brand-primary">
+                    <Instagram className="h-4 w-4 mr-2" /> Instagram
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-gray-900 mb-4">Contacto</h4>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-center"><MapPinIcon className="h-4 w-4 mr-2"/> San Nicolás, BA</li>
-                <li className="flex items-center"><UserIcon className="h-4 w-4 mr-2"/> +54 9 346 123-4567</li>
+                <li className="flex items-center"><MapPinIcon className="h-4 w-4 mr-2"/> San Nicolás de los Arroyos, Buenos Aires</li>
+                <li className="flex items-center"><UserIcon className="h-4 w-4 mr-2"/> +54 9 3364 02-2033</li>
               </ul>
             </div>
           </div>

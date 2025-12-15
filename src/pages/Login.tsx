@@ -38,10 +38,10 @@ export default function Login() {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         <div className="text-center">
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            ¡Bienvenido de nuevo!
+            Bienvenido nuevamente
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Ingresa a tu cuenta para gestionar tus mascotas
+            Inicie sesión para gestionar sus mascotas
           </p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -65,7 +65,7 @@ export default function Login() {
               />
               <div className="flex justify-end mt-1">
                 <a href="#" className="text-xs text-brand-primary hover:text-brand-deep font-medium">
-                  ¿Olvidaste tu contraseña?
+                  ¿Olvidó su contraseña?
                 </a>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default function Login() {
               <div className="w-full border-t border-gray-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">O continúa con</span>
+              <span className="px-2 bg-white text-gray-500">O continúe con</span>
             </div>
           </div>
 
@@ -110,9 +110,9 @@ export default function Login() {
         </form>
         <div className="text-center mt-4">
           <p className="text-sm text-gray-600">
-            ¿No tienes cuenta?{' '}
+            ¿No tiene cuenta?{' '}
             <Link to="/register" className="font-medium text-brand-primary hover:text-brand-deep">
-              Regístrate aquí
+              Regístrese aquí
             </Link>
           </p>
         </div>
