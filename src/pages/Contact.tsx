@@ -21,7 +21,15 @@ type FormData = yup.InferType<typeof schema>;
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<FormData>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema) as any,
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      consent: false,
+      message: ''
+    }
   });
 
   const onSubmit = async (data: FormData) => {

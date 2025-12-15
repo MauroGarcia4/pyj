@@ -25,7 +25,14 @@ export default function Register() {
   const [authError, setAuthError] = useState<string | null>(null);
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema) as any,
+    defaultValues: {
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      terms: false
+    }
   });
 
   const onSubmit = async (data: FormData) => {
