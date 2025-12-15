@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1200" viewBox="0 0 2400 1200">
+  <defs>
+    <style>
+      .tile{rx:80}
+      .word{font: 700 180px system-ui, -apple-system, Segoe UI, Roboto, Arial}
+      .tag{font: 300 84px system-ui, -apple-system, Segoe UI, Roboto, Arial; letter-spacing: 8px}
+    </style>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <g transform="translate(300,180)">
+    <rect class="tile" x="0"   y="0" width="300" height="300" fill="#A78BFA"/>
+    <rect class="tile" x="330" y="0" width="300" height="300" fill="#0EA5A4"/>
+    <rect class="tile" x="660" y="0" width="300" height="300" fill="#A7F3D0"/>
+    <rect class="tile" x="990" y="0" width="300" height="300" fill="#0F766E"/>
+    <rect class="tile" x="1320" y="0" width="300" height="300" fill="#A78BFA"/>
+    <g fill="#ffffff">
+      <path d="M150 230c60 0 110-50 110-110 0-70-60-110-120-90 20 30 0 60-30 70 0 70 40 130 40 130z" transform="translate(0,0)"/>
+      <path d="M480 110c70-40 140 30 120 100-50 20-80-10-110-40-10-10-20-20-10-60z"/>
+      <path d="M810 220c60 0 90-70 40-120-20-20-10-50 10-70-80 20-110 90-50 160z"/>
+      <path d="M1140 220c80-20 90-110 20-150-40-20-20-30 0-40-90 20-70 140-20 190z"/>
+      <path d="M1470 220c70-10 90-70 40-110-40-30-20-40 0-50-100 30-80 140-40 160z"/>
+    </g>
+  </g>
+  <text x="1200" y="620" text-anchor="middle" fill="#6B7280" class="word">PEDRO Y JUAN</text>
+  <text x="1200" y="760" text-anchor="middle" fill="#9CA3AF" class="tag">PET SHOP · VETERINARIA · PELUQUERÍA</text>
+</svg>
