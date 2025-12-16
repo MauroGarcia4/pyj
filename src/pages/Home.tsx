@@ -139,7 +139,9 @@ const Home: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center p-8">
               <span className="text-brand-light font-bold text-sm uppercase tracking-wider mb-2">Solo por hoy</span>
               <h3 className="text-3xl font-bold text-white mb-4">20% OFF en <br/>Alimentos premium</h3>
-              <Button size="sm" className="w-fit bg-white text-black hover:bg-gray-100 border-none">Ver catálogo</Button>
+              <Link to="/products?category=alimentos">
+                <Button size="sm" className="w-fit bg-white text-black hover:bg-gray-100 border-none">Ver catálogo</Button>
+              </Link>
             </div>
           </div>
           <div className="relative rounded-2xl overflow-hidden h-64 group cursor-pointer">
@@ -151,7 +153,9 @@ const Home: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-brand-deep/80 to-transparent flex flex-col justify-center p-8">
               <span className="text-brand-light font-bold text-sm uppercase tracking-wider mb-2">Novedades</span>
               <h3 className="text-3xl font-bold text-white mb-4">Juguetes para <br/>gatos felices</h3>
-              <Button size="sm" className="w-fit bg-white text-black hover:bg-gray-100 border-none">Comprar ahora</Button>
+              <Link to="/products?category=juguetes">
+                <Button size="sm" className="w-fit bg-white text-black hover:bg-gray-100 border-none">Comprar ahora</Button>
+              </Link>
             </div>
           </div>
         </div>
